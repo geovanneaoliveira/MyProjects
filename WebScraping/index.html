@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        let resultados;
+        var proxy = "https://cors-anywhere.herokuapp.com/";
+        var url = "https://www.placardefutebol.com.br/time/vasco/ultimos-jogos";
+        scraper = function(url) {
+            let x = new XMLHttpRequest();
+            x.onreadystatechange = function(){
+                if(this.readyState==4 && this.status==200){
+                    let response = this.responseText;
+                    //let regex = /<b>+(\d)<\/b>/g;
+                    //let regex = /<div class="match__md_card--ht-name text">+(.*?)<\/div>/gm;
+                    let regex = /<div class="match__md_card--at-name text">+(?!>)([^><]+)(?=<\/div>)<\/div>/gm;
+                    retorno = response.match(regex);
+                    console.log(retorno);
+                }
+            }
+            x.open("GET", url);
+            x.send();
+        }
+        scraper(proxy+url);
+    </script>
+</body>
+</html>
