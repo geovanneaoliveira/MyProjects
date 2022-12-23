@@ -8,19 +8,32 @@
 </head>
 <body>
     <script type="text/javascript">
-        let resultados;
         var proxy = "https://cors-anywhere.herokuapp.com/";
         var url = "https://www.placardefutebol.com.br/time/vasco/ultimos-jogos";
+        var url2 = "https://www.flashscore.com.br/";
         scraper = function(url) {
             let x = new XMLHttpRequest();
             x.onreadystatechange = function(){
                 if(this.readyState==4 && this.status==200){
+                    let partidasFormatadas = [];
                     let response = this.responseText;
-                    //let regex = /<b>+(\d)<\/b>/g;
-                    //let regex = /<div class="match__md_card--ht-name text">+(.*?)<\/div>/gm;
-                    let regex = /<div class="match__md_card--at-name text">+(?!>)([^><]+)(?=<\/div>)<\/div>/gm;
-                    retorno = response.match(regex);
-                    console.log(retorno);
+                    document.body.innerHTML = response;
+                    var partidas = document.querySelectorAll('div.match__md_card');
+                    partidas.forEach(pa => {
+                        texto = pa.innerText.split('\n');
+                        var jogo = {
+                        campeonato: texto[0],
+                        timeCasa: texto[1],
+                        timeFora: texto[2],
+                        placar: texto[3],
+                        data: texto[4],
+                            getPlacar: function() {
+                            return this.timeCasa + this.placar + this.timeFora;
+                            }
+                        };
+                        partidasFormatadas.push(jogo);
+                    });
+                    console.log(partidasFormatadas);
                 }
             }
             x.open("GET", url);
