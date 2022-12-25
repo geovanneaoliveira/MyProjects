@@ -9,14 +9,14 @@
 <body>
     <script type="text/javascript">
         var proxy = "https://cors-anywhere.herokuapp.com/";
-        var url = "https://www.placardefutebol.com.br/time/vasco/ultimos-jogos";
-        var url2 = "https://www.flashscore.com.br/";
+        var url = "https://api.jikan.moe/v4/anime?q=hunter&sfw";
         scraper = function(url) {
             let x = new XMLHttpRequest();
             x.onreadystatechange = function(){
                 if(this.readyState==4 && this.status==200){
                     let partidasFormatadas = [];
                     let response = this.responseText;
+                    console.log(JSON.parse(response));
                     document.body.innerHTML = response;
                     var partidas = document.querySelectorAll('div.match__md_card');
                     partidas.forEach(pa => {
