@@ -10,7 +10,7 @@ public class Main {
         //Teste 2
         System.out.println(returnConcat(new String[]{"CARLOS","EDUARDO","DA","COSTA"}));
         //Teste 3
-        System.out.println(returnGreatest(new int[]{334}));
+        System.out.println(returnGreatest(new int[]{334, 568, 123, 796, 256}));
     }
 
     //Questão 1
