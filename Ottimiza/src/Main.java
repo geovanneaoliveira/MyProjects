@@ -10,7 +10,7 @@ public class Main {
         //Teste 2
         System.out.println(returnConcat(new String[]{"CARLOS","EDUARDO","DA","COSTA"}));
         //Teste 3
-        System.out.println(returnGreatest(new int[]{334, 568, 123, 796, 256}));
+        System.out.println(returnGreatest(new int[]{334}));
     }
 
     //Questão 1
@@ -43,8 +43,8 @@ public class Main {
     //Questão 3
     public static int returnGreatest (int[] ints){
         if(ints.length!=0){
-            int greatest = -10000000;
-            for(int i = 0;i< ints.length;i++) {
+            int greatest = ints[0];
+            for(int i = 1;i< ints.length;i++) {
                 if (ints[i] > greatest) {
                     greatest = ints[i];
                 }
